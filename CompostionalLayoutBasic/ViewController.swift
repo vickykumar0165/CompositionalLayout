@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var mycollectionView: UICollectionView!
+    var titlValue:String = "1"
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
 //        layout.itemSize = CGSize(width: 100, height: 100)
 //        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         mycollectionView.collectionViewLayout = layout()
+        self.navigationItem.title = titlValue
     }
     
     func layout()->UICollectionViewLayout{
@@ -188,6 +190,13 @@ func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElem
         return UICollectionReusableView()
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let viewcontroller = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController{
+            valueForTitle+=1
+            viewcontroller.titlValue = "\(valueForTitle)"
+            self.navigationController?.pushViewController(viewcontroller, animated: true)
+        }
+    }
 }
 
